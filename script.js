@@ -1,73 +1,29 @@
-const slider = document.querySelector('.service-container');
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  grabCursor: true,
+  spaceBetween: 30,
+  slidesPerView: 1,
 
-let isDown = false;
-let startX =0;
-let scrollLeft =0;
-let velocity = 0;
-let rafId = null;
-
-function startDrag(e) {
-    isDown = true;
-    slider.classList.add('active');           // visual feedback (cursor: grabbing usually)
-    
-    // Support both mouse and touch
-    const pageX = e.pageX || e.touches?.[0]?.pageX;
-    startX = pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-
-    // Cancel any ongoing momentum
-    cancelAnimationFrame(rafId);
-    velocity = 0;
-}
-function stopDrag() {
-    if (!isDown) return;
-    isDown = false;
-    slider.classList.remove('active');
-
-    // Optional: add a little momentum/inertia
-    // (uncomment if you want smooth flick feel)
-    // if (Math.abs(velocity) > 0.5) {
-    //     function momentum() {
-    //         slider.scrollLeft -= velocity;
-    //         velocity *= 0.95; // friction
-    //         if (Math.abs(velocity) > 0.5) {
-    //             rafId = requestAnimationFrame(momentum);
-    //         }
-    //     }
-    //     rafId = requestAnimationFrame(momentum);
-    // }
-}
-
-function drag(e) {
-    if (!isDown) return;
-    const pageX = e.pageX || e.touches?.[0]?.pageX;
-    const pageY = e.pageY || e.touches?.[0]?.pageY;
-
-    const x = pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.8;
-
-    // Only prevent default if horizontal movement is bigger than vertical
-    const moveX = Math.abs(pageX - startX);
-    const moveY = Math.abs(pageY - startX);
-
-    if (moveX > moveY) {
-        e.preventDefault(); // only block when dragging sideways
-        slider.scrollLeft = scrollLeft - walk;
+  // Responsive
+  breakpoints: {
+    640: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 3,
     }
-}
+  },
 
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
 
-
-slider.addEventListener('mousedown', startDrag);
-slider.addEventListener('mousemove', drag);
-slider.addEventListener('mouseup', stopDrag);
-slider.addEventListener('mouseleave', stopDrag);
-
-// Touch events (very important for mobile)
-slider.addEventListener('touchstart', startDrag, { passive: false });
-slider.addEventListener('touchmove', drag, { passive: false });
-slider.addEventListener('touchend', stopDrag);
-slider.addEventListener('touchcancel', stopDrag);
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
 
 
 
@@ -89,14 +45,50 @@ tabs.forEach(tab => {
 });
 
 
+document.querySelectorAll(".service-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const index = button.dataset.tab;
+
+        tabs.forEach(t => t.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        tabs[index].classList.add("active");
+        sections[index].classList.add("active");
+
+        sections[index].scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
  const burger = document.querySelector('.burger-menu');
- const mobile = document.getElementById('mobile-links');
- const navLinks = document.querySelectorAll('.mobile-nav .nav-links a');
- const navMenu = document.querySelector('.mobile-nav .nav-links');
+ const close = document.querySelector('.close');
+ const mobile = document.querySelector('.mobile-nav');
+ const navLinks = document.querySelectorAll('.nav-links a ');
+ const navMenu = document.querySelector('.nav-links');
 
  burger.addEventListener('click',()=>{
     burger.classList.toggle('active');
     mobile.classList.toggle('active');
+    
+ })
+
+ close.addEventListener('click',()=>{
+    mobile.classList.remove('active')
+    burger.classList.toggle('active');
  })
 
 
@@ -107,8 +99,21 @@ tabs.forEach(tab => {
     });
 });
 
+
+
  
-//  burger.addEventListener('click',()=>{
-//     burger.classList.remove('active');
-//     mobile.classList.remove('active');
-//  })
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }else{
+             entry.target.classList.remove("show");
+        }
+    });
+}, {
+    threshold: 0.2
+});
+
+document.querySelectorAll(".fade").forEach((section) => {
+    observer.observe(section);
+});

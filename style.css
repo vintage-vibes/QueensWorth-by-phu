@@ -5,6 +5,8 @@
 }
 html{
     scroll-behavior: smooth;
+    scroll-padding-top: 200px;
+
 }
 h1, h2, h3 {
     font-family: 'Bebas Neue', sans-serif;
@@ -18,16 +20,58 @@ p{
 }
 
 
+.fade{
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+section,
+.pricing-section {
+    scroll-margin-top: 20px; 
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title{
+    text-align: center;
+}
+
+ .section-title h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2em;
+    margin-bottom: -10px;
+    color: #000;
+}
+
+ .section-title p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95em;
+    color: #C9A227;
+    margin-bottom: 50px;
+    
+}
+
 header{
     position: relative;
-    height: 70vh;
-    background-image: url(img/q.18.jpg);
+    height: 100vh;
+    /* background-image: url(img/q.18.jpg); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
    
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     z-index: 0;
 }
 
@@ -38,7 +82,7 @@ header::after{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color:rgba(0, 0, 0, 0.6);
+    background-color:rgba(0, 0, 0, 0.30);
 }
 
 header .hero{
@@ -46,17 +90,38 @@ header .hero{
     position: relative;
     z-index: 5;
 }
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.15);
+    z-index: -1;
+}
+
 /* burgermenu */
 
 .burger-menu{
     position: absolute;
-    top: 10px;
+   
+    top: 30px;
     right: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     z-index: 100;
 
 }
@@ -72,44 +137,69 @@ header .hero{
 .burger-menu.active span{
     background-color: red;
 }
-.mobile-nav .logo{
-    display: none;
-    padding:  30px 20px;
-}
 
-.mobile-nav .nav-links{
+
+   
+
+
+ .mobile-nav{
     position: fixed;
     top: 0;
-    left: -2000px;
+    left: -100%;
     width: 100%;
-    height: 100%;
-   padding-top:80px ;
+    height: 100vh;
+    padding-top:120px ;
+   display: flex;
     align-items: center;
     flex-direction: column;
     background-color: rgb(0, 0, 0, 0.7);
-    z-index: 99;
+    z-index: 9999;
     transition: ease 0.5s;
     
 }
 
-#mobile-links.active{
-    left:0 ;
+.mobile-nav.active{
+    left:0;
+}
+
+.mobile-nav img{
+    position: absolute; 
+    top: 0;
+    left: 60px;
+    padding: 10px 0px;
+}
+.logo{
+    width: 90px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.mobile-nav .close{
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    
+    cursor: pointer;
 }
 
 .burger-menu.active span:nth-child(1){
-    transform: rotate(45deg) translate(5px,5px);
+    /* transform: rotate(45deg) translate(5px,5px); */
+    opacity: 0;
 }
 
 .burger-menu.active span:nth-child(2){
     opacity: 0;
 }
 .burger-menu.active span:nth-child(3){
-    transform: rotate(-45deg) translate(9px,-9px);
+    /* transform: rotate(-45deg) translate(9px,-9px); */
+    opacity: 0;
 }
+
  
 
-.mobile-nav .nav-links a{
-
+.mobile-nav a{
+  
     font-size: 1.5em;
     font-weight: 600;
    
@@ -119,18 +209,20 @@ header .hero{
 /* navbar */
 
 .navbar{
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding:  20px 0px;
+
+    padding: 20px 40px;
     z-index: 10;
+    box-sizing: border-box; 
 }
-.logo img{
-    width:60px;
-    border-radius: 50%;
-     transform: scale(1.6);
-}
+
 .nav-links{
     display: flex;
     gap: 2em;
@@ -168,10 +260,17 @@ header .hero{
   
 }
 
+.hero .banner{
+    margin: 0 auto;
+    border-radius: 50%;
+    height: auto;
+    width: 220px;
+}
+
 .hero h1{
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 500;
-    font-size:4em;
+    font-size:5em;
     color:#C9A227;
     margin-bottom:-20px;
     letter-spacing: 2px;
@@ -180,8 +279,10 @@ header .hero{
 
 .hero .tagline {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
+    font-size: 0.98em;
     /* letter-spacing: 2px; */
+    text-transform: uppercase;
+    font-style: italic;
     font-weight: 400;
     color: #fff;
     padding: 0px 20px;
@@ -195,6 +296,7 @@ header .hero{
     font-size: 1.2em;
     font-weight: 600;
 }
+
 
 .hero-btn {
     text-decoration: none;
@@ -213,75 +315,98 @@ header .hero{
 }
 
 .hero-btn:hover {
-    background: #c59803;
-    transform: scale(1.05);
+    background: #d6a502;
+    /* transform: scale(1.05); */
 }
 
 
  /* services */
 
-
-
- .service-container{
-   
+ .services{
+    padding: 200px 5%;
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 20px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 20px 10px;
-  
+    min-height: 100vh;
+    background: #FAF8F3;
+    z-index: 1;
 
-    user-select: none;
-  -webkit-user-select: none;
+ }
 
-
-    scrollbar-width: none;          
-  -ms-overflow-style: none;       
-}
-
-.service-container::-webkit-scrollbar {
-  display: none;                  /* Chrome, Safari, new Edge */
-}
- 
-
- .item{
-    flex: 0 0 320px; 
-    scroll-snap-align: start;
-    background: rgba(255, 255, 255, 0); /* fully transparent */
-    /* border: 1px solid black;           */
-    border-radius: 30px;
-    padding: 20px;
- 
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    border-color: #C9A227; /* optional soft pink on hover */
-}
- 
-.item img {
+ .services-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
 }
 
-.item h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    font-weight: 300;
-    margin-bottom: 10px;
-    color: #c59a0f;
+ .swiper {
+  width: 90%;
+  max-width: 1400px;  
+  margin: 0 auto;
+  padding: 20px 0 50px; 
+  overflow: hidden;
 }
+
+.card-list{
+    
+    padding: 60px 0px;
+}
+
+
+ .card-list .card-item .card-link{
+    
+    display: block;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid transparent;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.16);
+    transition: 0.2s ease;
+
+ }
+.card-list .card-link .card-image{
+    
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit:cover ;
+    border-radius: 10px;
+    
+    
+}
+
+
+
+.card-link:hover{
+    border-color: #c29912;
+    box-shadow: 0 20px 45px rgba(0,0,0,.15);
+}
+
+.container .swiper-pagination-bullet {
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
+    background: #c3990f;
+}
+
+.container .swiper-pagination-bullet-active{
+    opacity: 1;
+}
+
+.container .swiper-slide-button{
+    color: #c59806;
+    margin: -15px;
+}
+
+.card-list .card-item .card-link:active{
+    cursor: grabbing;
+}
+.card-content{
+    padding: 19px;
+}
+ 
+
 
 
 .service-btn {
@@ -299,22 +424,30 @@ header .hero{
 }
 
 .service-btn:hover {
-    color: #C9A227;              /* soft pink text on hover */
-    border-bottom-color: #C9A227; /* bottom border changes color */
-    transform: translateY(-3px);  /* slight lift effect */
-}
+    color: #C9A227;              
+    border-bottom-color: #C9A227; 
+    transform: translateY(-3px);  
+} */
 
 
 /* about */
 
+.about{
+padding: 200px 5%;
+margin-top: 60px;
+}
+
 .about-container{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 3em;
     margin-top: 25px;
     padding: 25px 30px;
 }
-
+.about-container .title{
+    margin-bottom:40px ;
+}
 .about-container .image{
     flex: 1;
 }
@@ -347,18 +480,56 @@ header .hero{
 .description{
     
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1em;
+    font-size: 0.98em;
     line-height: 1.7;
     color: #555;
 }
 
 
+.about-features {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.about-features div {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: #333;
+}
+
+.about-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 32px;
+    background: #c29912;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.about-btn:hover {
+    background: #111;
+}
+
 /* pricing */
 
+
+
+.pricing{
+    padding: 100px 5%;
+    background: #FAF8F3;
+    
+}
+
 .pricing-head{
-  
+    
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 60px;
     padding: 40px 30px;
@@ -375,7 +546,7 @@ header .hero{
 }
 
 .pricing-head .image img{
-    width: 90%;
+    width: 100%;
     height: 400px;
     object-fit: cover;
     border-radius: 15px;
@@ -506,8 +677,8 @@ header .hero{
 
  .banner{
     position: relative;
-    margin-top: 60px;
-    height: 60vh;
+   
+    height: 80vh;
     width: 100%;
     overflow: hidden;
     z-index: -1;
@@ -531,11 +702,15 @@ header .hero{
         rgba(0, 0, 0, 0.5)  );
  }
 
+
+
+
+ 
 /* info */
 
 .info{
     text-align: center;
-    padding: 60px 20px;
+    padding: 100px 20px;
 }
  .info-container {
     position: relative;
@@ -593,6 +768,8 @@ header .hero{
     background-color: rgb(0, 0, 0, 0.6);
 }
 
+
+
 .info-card * {
     position: relative;
     z-index: 2;
@@ -625,16 +802,20 @@ header .hero{
     box-shadow: 0 10px 25px rgba(244, 193, 193, 0.3);
 }
 
-.info-card h2 {
+.info-card h2{
     color: #c59806;
     letter-spacing: 2px;
     font-size: 2.4em;
-    margin: 10px 0px;
+    margin: 20px 0px;
+    padding: 20px 0px;
 }
 
+
 .info-card p {
+    margin: 0 auto;
+    max-width: 600px;
     color: #fff;
-    font-size: 0.98em;
+    font-size: 0.88em;
     line-height: 1.7;
    padding: 0px 10px;
     padding-bottom: 40px;
@@ -648,20 +829,6 @@ header .hero{
     text-align: center;
 }
 
- .section-title h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    margin-bottom: -10px;
-    color: #000;
-}
-
- .section-title p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95em;
-    color: #C9A227;
-    margin-bottom: 50px;
-    
-}
 
 .testimonials-container {
     display: flex;
@@ -697,6 +864,7 @@ header .hero{
     font-weight: 600;
     letter-spacing: 2px;
     line-height: 1.7;
+    font-size: 0.88em;
 }
 
 /* footer */
@@ -787,47 +955,43 @@ header .hero{
 }
 
 
-@media (max-width: 900px){
-   .navbar{
+
+@media (max-width: 768px) {
+    .hero h1{
+        font-size: 3em;
+    }
+     .navbar{
     display: none;
    }
-   .mobile-nav .logo{
-    position: relative;
-    display: block;
-    z-index: 50;
+   .hero .banner{
+    width: 80px;
+    margin-bottom: 40px;
+   }
+   .logo{
+    width: 60px;
+   }
    
-}
+
+
+
    .burger-menu span{
     display: block;
    }
-    .service-container{
-        justify-content: flex-start;
+
+    .swiper{
+
     }
 
-}
-
-@media (max-width: 868px) {
-    
-        /* .first-row {
-            display: flex;
-            flex-wrap: wra;
-            gap: 20px;
-        } */
-
-}
-
-/* Tablet */
-@media (max-width: 768px) {
-      header{
-         height:auto;
-         padding-bottom: 10px;
+    .container .swiper-slide-button {
+        display: none;
     }
+   
     
     .item {
         flex: 0 0 230px;
     }
     .about-container{
-        flex-direction: column;
+       flex-direction: column;
         text-align: center;
     }
 
@@ -837,6 +1001,19 @@ header .hero{
     border-radius: 25px;
     object-fit: cover;
 }
+
+ .about-container .image,
+    .about-container .content {
+        width: 100%;
+        flex: none;
+    }
+
+    .about-container .image img {
+        width: 100%;
+        height: 400px; /* Adjust as needed */
+        display: block;
+    }
+
 
 .first-row {
     display: flex;
@@ -850,9 +1027,11 @@ header .hero{
 }
 
 .banner{
-    height: 40vh;
+    height: 60vh;
 }
-
+ .pricing-head{
+    flex-direction: column;
+ }
 
 
 }
