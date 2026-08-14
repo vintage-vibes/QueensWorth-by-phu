@@ -588,6 +588,7 @@ margin-top: 60px;
 .pricing-content{
     margin-top: 50px;
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
     padding: 15px 20px;
 
@@ -678,7 +679,7 @@ margin-top: 60px;
  .banner{
     position: relative;
    
-    height: 80vh;
+    height: 60vh;
     width: 100%;
     overflow: hidden;
     z-index: -1;
@@ -701,6 +702,50 @@ margin-top: 60px;
         rgba(0, 0, 0, 0.3), 
         rgba(0, 0, 0, 0.5)  );
  }
+
+ .banner-overlay{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+    padding: 20px;
+}
+
+.banner-subtitle{
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #d4af37;
+}
+
+.banner-overlay h2{
+    font-size: 3rem;
+    max-width: 800px;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    color: #fff;
+}
+
+.banner-btn{
+    display: inline-block;
+    padding: 14px 28px;
+    background: #D4AF37;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.banner-btn:hover{
+    background: #0f4524;
+}
 
 
 
@@ -1027,7 +1072,7 @@ margin-top: 60px;
 }
 
 .banner{
-    height: 60vh;
+    height: 40vh;
 }
  .pricing-head{
     flex-direction: column;
